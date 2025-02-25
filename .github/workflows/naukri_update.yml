@@ -1,0 +1,33 @@
+name: Naukri Profile Updater
+
+on:
+  schedule:
+    - cron: "0 3 * * *"  # 08:30 AM IST
+    - cron: "30 8 * * *" # 02:00 PM IST
+    - cron: "0 12 * * *" # 05:30 PM IST
+  workflow_dispatch: # Allows manual triggering
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+
+      - name: Install Dependencies
+        run: |
+          pip install selenium webdriver-manager requests
+
+      - name: Run Automation Script
+        env:
+          Naukri_BOT_TOKEN: ${{ secrets.Naukri_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          naukri_username: ${{ secrets.naukri_username }}
+          naukri_pwd: ${{ secrets.naukri_pwd }}
+        run: python Naukri.py
