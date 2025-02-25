@@ -22,7 +22,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pip install selenium requests webdriver-manager undetected-chromedriver
+          pip install selenium requests webdriver-manager undetected-chromedriver fake-useragent
 
       - name: Run Automation Script
         env:
