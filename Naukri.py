@@ -60,6 +60,9 @@ try:
     time.sleep(3)
     driver.save_screenshot("open_naukri.png")
     print("Opened Naukri site")
+    sc0 = "open_site.png"
+    driver.save_screenshot(sc0) 
+    send_telegram_screenshot(sc0)
 
     # Step 2: Click Login
     #login_button = driver.find_element(By.XPATH, "//a[text()='Login']")
