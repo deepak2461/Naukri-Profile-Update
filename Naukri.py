@@ -63,8 +63,8 @@ chrome_options.add_argument("--disable-blink-features=AutomationControlled")
 chrome_options.add_argument(f"user-agent={random_user_agent}")
 
 #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-#driver = uc.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-driver = uc.Chrome(headless=True)
+driver = uc.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+#driver = uc.Chrome(headless=True)
 try:
     # Step 1: Open Naukri.com
     driver.get("https://www.naukri.com/")
