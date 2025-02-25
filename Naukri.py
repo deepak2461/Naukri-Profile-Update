@@ -26,6 +26,20 @@ def send_telegram_message(message):
     data = {"chat_id": TELEGRAM_CHAT_ID, "text": message}
     requests.post(url, data=data)
 
+def send_telegram_screenshot(photo_path):
+    url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendPhoto"
+    
+    with open(photo_path, "rb") as photo:
+        data = {"chat_id": TELEGRAM_CHAT_ID}
+        files = {"photo": photo}
+        
+        response = requests.post(url, data=data, files=files)
+        
+        if response.status_code == 200:
+            print("✅ Screenshot sent to Telegram successfully!")
+        else:
+            print(f"❌ Failed to send screenshot. Status Code: {response.status_code}, Response: {response.text}")
+            
 # Configure Selenium WebDriver
 #chrome_options = Options()
 chrome_options = uc.ChromeOptions()
@@ -53,7 +67,10 @@ try:
     login_button = driver.find_element(by=By.XPATH, value='//*[@id="login_Layer"]')
     login_button.click()
     time.sleep(3)
-    driver.save_screenshot("login_click.png")
+    #driver.save_screenshot("login_click.png")
+    sc1 = "login_click.png"
+    driver.save_screenshot(sc1) 
+    send_telegram_screenshot(sc1)
     print("Clicked on Login")
 
     # Step 3: Enter Creds
