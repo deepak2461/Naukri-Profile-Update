@@ -27,7 +27,7 @@ def send_telegram_message(message):
 
 # Configure Selenium WebDriver
 chrome_options = Options()
-#chrome_options.add_argument("--headless")  # Run in headless mode (no GUI)
+chrome_options.add_argument("--headless")  # Run in headless mode (no GUI)
 chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("--no-sandbox")
 
