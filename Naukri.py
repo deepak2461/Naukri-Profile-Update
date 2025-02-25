@@ -7,6 +7,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 import time
 import requests
 import os
+import undetected_chromedriver as uc
 
 # Telegram Bot Configuration
 TELEGRAM_BOT_TOKEN = os.getenv("Naukri_BOT_TOKEN")
@@ -26,18 +27,19 @@ def send_telegram_message(message):
     requests.post(url, data=data)
 
 # Configure Selenium WebDriver
-chrome_options = Options()
+#chrome_options = Options()
+chrome_options = uc.ChromeOptions()
 chrome_options.add_argument("--headless")  # Run in headless mode (no GUI)
 chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-dev-shm-usage")  # Prevent crashes due to limited /dev/shm space
 chrome_options.add_argument("--window-size=1920,1080") 
 chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.5481.78 Safari/537.36")
+chrome_options.add_argument("--disable-blink-features=AutomationControlled")
 
 
-
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-
+#driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+driver = uc.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
 try:
     # Step 1: Open Naukri.com
     driver.get("https://www.naukri.com/")
