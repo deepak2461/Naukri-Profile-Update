@@ -32,6 +32,8 @@ chrome_options.add_argument("--disable-gpu")
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-dev-shm-usage")  # Prevent crashes due to limited /dev/shm space
 chrome_options.add_argument("--window-size=1920,1080") 
+chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.5481.78 Safari/537.36")
+
 
 
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
@@ -40,6 +42,8 @@ try:
     # Step 1: Open Naukri.com
     driver.get("https://www.naukri.com/")
     time.sleep(3)
+    driver.save_screenshot("open_naukri.png")
+    print("Opened Naukri site")
 
     # Step 2: Click Login
     #login_button = driver.find_element(By.XPATH, "//a[text()='Login']")
@@ -47,7 +51,8 @@ try:
     login_button = driver.find_element(by=By.XPATH, value='//*[@id="login_Layer"]')
     login_button.click()
     time.sleep(3)
-    print("Step 2 completed")
+    driver.save_screenshot("login_click.png")
+    print("Clicked on Login")
 
     # Step 3: Enter Creds
     #username = driver.find_element_by_xpath('//*[@id="root"]/div[4]/div[2]/div/div/div[2]/div/form/div[2]/input')
