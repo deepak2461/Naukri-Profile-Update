@@ -8,6 +8,8 @@ import time
 import requests
 import os
 import undetected_chromedriver as uc
+from fake_useragent import UserAgent
+import random
 
 # Telegram Bot Configuration
 TELEGRAM_BOT_TOKEN = os.getenv("Naukri_BOT_TOKEN")
@@ -39,9 +41,17 @@ def send_telegram_screenshot(photo_path):
             print("✅ Screenshot sent to Telegram successfully!")
         else:
             print(f"❌ Failed to send screenshot. Status Code: {response.status_code}, Response: {response.text}")
-            
+
+
+def human_delay():
+    time.sleep(random.uniform(3, 5))
+
+
 # Configure Selenium WebDriver
 #chrome_options = Options()
+ua = UserAgent()
+random_user_agent = ua.random
+
 chrome_options = uc.ChromeOptions()
 chrome_options.add_argument("--headless")  # Run in headless mode (no GUI)
 chrome_options.add_argument("--disable-gpu")
@@ -50,14 +60,16 @@ chrome_options.add_argument("--disable-dev-shm-usage")  # Prevent crashes due to
 chrome_options.add_argument("--window-size=1920,1080") 
 chrome_options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.5481.78 Safari/537.36")
 chrome_options.add_argument("--disable-blink-features=AutomationControlled")
-
+chrome_options.add_argument(f"user-agent={random_user_agent}")
 
 #driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
-driver = uc.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+#driver = uc.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
+driver = uc.Chrome(headless=True)
 try:
     # Step 1: Open Naukri.com
     driver.get("https://www.naukri.com/")
-    time.sleep(3)
+    #time.sleep(3)
+    human_delay()
     driver.save_screenshot("open_naukri.png")
     print("Opened Naukri site")
     sc0 = "open_site.png"
