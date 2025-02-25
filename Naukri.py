@@ -41,14 +41,17 @@ try:
 
     # Step 2: Click Login
     #login_button = driver.find_element(By.XPATH, "//a[text()='Login']")
-    login_button = driver.find_element_by_xpath('//*[@id="login_Layer"]')
+    #login_button = driver.find_element_by_xpath('//*[@id="login_Layer"]')
+    login_button = driver.find_element(by=By.XPATH, value='//*[@id="login_Layer"]')
     login_button.click()
     time.sleep(3)
     print("Step 2 completed")
 
     # Step 3: Enter Creds
-    username = driver.find_element_by_xpath('//*[@id="root"]/div[4]/div[2]/div/div/div[2]/div/form/div[2]/input')
-    password = driver.find_element_by_xpath('//*[@id="root"]/div[4]/div[2]/div/div/div[2]/div/form/div[3]/input')
+    #username = driver.find_element_by_xpath('//*[@id="root"]/div[4]/div[2]/div/div/div[2]/div/form/div[2]/input')
+    username = driver.find_element(by=By.XPATH, value='//*[@id="root"]/div[4]/div[2]/div/div/div[2]/div/form/div[2]/input')
+    #password = driver.find_element_by_xpath('//*[@id="root"]/div[4]/div[2]/div/div/div[2]/div/form/div[3]/input')
+    password = driver.find_element(by=By.XPATH, value='//*[@id="root"]/div[4]/div[2]/div/div/div[2]/div/form/div[3]/input')
     username.send_keys(usernamee)
     password.send_keys(passwordd)
     password.send_keys(Keys.RETURN)
@@ -66,7 +69,8 @@ try:
     
     # Step 5: Click Edit and Save
     #edit_button = driver.find_element(By.XPATH, '//*[@id="root"]/div/div/span/div/div/div/div/div/div[1]/div[1]/div/div[1]/div/div[2]/div[1]/div/div[1]/em')
-    edit_button = driver.find_element_by_xpath('//*[@id="root"]/div/div/span/div/div/div/div/div/div[1]/div[1]/div/div[1]/div/div[2]/div[1]/div/div[1]/em')
+    #edit_button = driver.find_element_by_xpath('//*[@id="root"]/div/div/span/div/div/div/div/div/div[1]/div[1]/div/div[1]/div/div[2]/div[1]/div/div[1]/em')
+    edit_button = driver.find_element(by=By.XPATH, value='//*[@id="root"]/div/div/span/div/div/div/div/div/div[1]/div[1]/div/div[1]/div/div[2]/div[1]/div/div[1]/em')
     edit_button.click()
     time.sleep(2)
 
